@@ -1,4 +1,4 @@
-!/bin/sh
+#!/bin/sh
 sudo pkg install -y git gmake pkgconf cairo gstreamer1-plugins libudev-devd libsndfile \
 openal-soft pulseaudio alsa-lib libglvnd libGLU glew freeimage uriparser rtaudio glfw freeglut \
 pugixml v4l_compat premake5 cmake
