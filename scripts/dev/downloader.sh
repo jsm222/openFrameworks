@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/localbin/bash
 VERSION=4.5.0
 printDownloaderHelp() {
     cat <<EOF

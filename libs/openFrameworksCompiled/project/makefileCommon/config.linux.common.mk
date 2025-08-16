@@ -355,8 +355,6 @@ PLATFORM_PKG_CONFIG_LIBRARIES += freetype2
 PLATFORM_PKG_CONFIG_LIBRARIES += fontconfig
 PLATFORM_PKG_CONFIG_LIBRARIES += sndfile
 PLATFORM_PKG_CONFIG_LIBRARIES += openal
-PLATFORM_PKG_CONFIG_LIBRARIES += tess2
-PLATFORM_PKG_CONFIG_LIBRARIES += kissfft-float
 
 
 ifeq "$(shell pkg-config --exists openssl && echo 1)" "1"

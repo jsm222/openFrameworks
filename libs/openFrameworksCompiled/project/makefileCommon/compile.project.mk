@@ -8,7 +8,7 @@ ifndef APPNAME
 endif
 
 include $(OF_SHARED_MAKEFILES_PATH)/config.shared.mk
-CFLAGS+=-I$(OF_ROOT)/scripts/linux/utfcpp-4.0.6/source/
+CFLAGS+=-I$(OF_ROOT)/scripts/linux/utfcpp-4.0.6/source
 # Name TARGET
 ifeq ($(findstring Debug,$(MAKECMDGOALS)),Debug)
 	TARGET_NAME = Debug
