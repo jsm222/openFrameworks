@@ -173,6 +173,7 @@ else
 	endif
 	PLATFORM_CXXFLAGS += -DGCC_HAS_REGEX
 endif
+PLATFORM_CXXVER = -std=c++17
 ifeq ("$(GCC_MAJOR)","5")
 	PLATFORM_CXXVER = -std=c++17
 endif
