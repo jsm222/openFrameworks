@@ -1093,7 +1093,8 @@ string ofSystem(const string & command) {
 ofTargetPlatform ofGetTargetPlatform() {
 #ifdef TARGET_LINUX
 	string arch = ofSystem("uname -m");
-	if (ofIsStringInString(arch, "x86_64")) {
+	fprintf(stderr,"%s:%d %s\n",__FILE__,__LINE__,arch.c_str());
+	if (ofIsStringInString(arch, "amd64")) {
 		return OF_TARGET_LINUX64;
 	} else if (ofIsStringInString(arch, "armv6l")) {
 		return OF_TARGET_LINUXARMV6L;

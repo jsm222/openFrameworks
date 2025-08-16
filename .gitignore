@@ -193,4 +193,4 @@ scripts/templates/vs/bin/emptyExample_debug.exe
 scripts/templates/vs2019/emptyExample.vcxproj.user
 libs/openFrameworksCompiled/project/android/build-*/
 
-
+scripts/linux/utfcpp-4.0.6/

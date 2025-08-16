@@ -735,8 +735,10 @@ void ofOpenALSoundPlayer::unload(){
 		std::unique_lock<std::mutex> lock(mutex);
 
 		// Delete sources before buffers.
-		alDeleteSources(sources.size(),&sources[0]);
-		alDeleteBuffers(buffers.size(),&buffers[0]);
+		if(!sources.empty())
+			alDeleteSources(sources.size(),&sources[0]);
+		if(!buffers.empty())
+			alDeleteBuffers(buffers.size(),&buffers[0]);
 
 		sources.clear();
 		buffers.clear();

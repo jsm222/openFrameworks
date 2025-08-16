@@ -1,9 +1,11 @@
-#!/usr/bin/env bash
-
+#!/usr/local/bin/bash
+set -x
+fetch https://github.com/nemtrif/utfcpp/archive/refs/tags/v4.0.6.tar.gz
+tar xzvf v4.0.6.tar.gz 
 export LC_ALL=C
 
 ARCH=$(uname -m)
-if [ "$ARCH" = "x86_64" ]; then
+if [ "$ARCH" = "amd64" ]; then
         LIBSPATH=linux64
 else
         LIBSPATH=linux
@@ -25,7 +27,7 @@ while getopts tj: opt ; do
 done
 
 cd "${SCRIPTPATH}/../../libs/openFrameworksCompiled/project"
-make -j$JOBS Debug
+gmake -j$JOBS Debug
 exit_code=$?
 if [ $exit_code != 0 ]; then
   echo "there has been a problem compiling Debug OF library"
@@ -34,7 +36,7 @@ if [ $exit_code != 0 ]; then
 fi
 
 if [ "$BUILD" == "install" ]; then
-    make -j$JOBS Release
+    gmake -j$JOBS Release
     exit_code=$?
     if [ $exit_code != 0 ]; then
       echo "there has been a problem compiling Release OF library"

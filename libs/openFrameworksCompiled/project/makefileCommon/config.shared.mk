@@ -21,14 +21,15 @@
 SHELL ?= /bin/sh
 OF_ROOT ?= ../../..
 PLATFORM_VARIANT ?= default
-
 # ifeq ($(CC),$(EMSCRIPTEN)/emcc)
 ifeq ($(findstring emcc, $(CC)),emcc)
 	PLATFORM_OS=emscripten
 endif
+PLATFORM_OS= linux
 PLATFORM_OS ?= $(shell uname -s)
 
 HOST_OS=$(shell uname -s)
+HOST_OS=linux
 
 ifdef MAKEFILE_DEBUG
     $(info HOST_OS=${HOST_OS})
@@ -82,8 +83,8 @@ endif
 # if not defined, construct the default PLATFORM_LIB_SUBPATH
 ifndef PLATFORM_LIB_SUBPATH
 	# determine from the arch
-	ifeq ($(PLATFORM_OS),Linux)
-		ifeq ($(PLATFORM_ARCH),x86_64)
+	ifeq ($(PLATFORM_OS),linux)
+		ifeq ($(PLATFORM_ARCH),amd64)
 			PLATFORM_LIB_SUBPATH=linux64
 		else ifeq ($(PLATFORM_ARCH),armv6l)
 			PLATFORM_LIB_SUBPATH=linuxarmv6l

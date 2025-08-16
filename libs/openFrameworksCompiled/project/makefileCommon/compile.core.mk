@@ -68,7 +68,7 @@ ALL_CFLAGS += $(OF_CORE_BASE_CFLAGS)
 # add the defines
 ALL_CFLAGS += $(OF_CORE_DEFINES_CFLAGS)
 # add the include cflags
-ALL_CFLAGS += $(OF_CORE_INCLUDES_CFLAGS)
+ALL_CFLAGS += $(OF_CORE_INCLUDES_CFLAGS) -I$(OF_ROOT)/scripts/linux/utfcpp-4.0.6/source/
 # clean up all extra whitespaces in the CFLAGS
 CFLAGS += $(strip $(ALL_CFLAGS))
 CXXFLAGS += $(OF_CORE_BASE_CXXFLAGS)

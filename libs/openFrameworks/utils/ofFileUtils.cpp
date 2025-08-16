@@ -12,6 +12,8 @@
 	#include <mach-o/dyld.h>       /* _NSGetExecutablePath */
 	#include <limits.h>        /* PATH_MAX */
 #endif
+#include <limits.h>
+#include <sys/sysctl.h>
 
 namespace fs = of::filesystem;
 
@@ -1872,6 +1874,7 @@ std::string ofFilePath::join(const fs::path& path1, const fs::path& path2){
 fs::path ofFilePath::getCurrentExePathFS(){
 	#if defined(TARGET_LINUX) || defined(TARGET_ANDROID)
 		char buff[FILENAME_MAX];
+		#ifndef __FreeBSD__
 		ssize_t size = readlink("/proc/self/exe", buff, sizeof(buff) - 1);
 		if (size == -1){
 			ofLogError("ofFilePath") << "getCurrentExePath(): readlink failed with error " << errno;
@@ -1880,6 +1883,13 @@ fs::path ofFilePath::getCurrentExePathFS(){
 			buff[size] = '\0';
 			return buff;
 		}
+	#else
+	static int pathname[] = { CTL_KERN, KERN_PROC, KERN_PROC_PATHNAME, -1 };
+	pathname[3] = getpid();
+	
+	size_t bsize = FILENAME_MAX;
+        sysctl( pathname, sizeof(pathname)/sizeof(pathname[0]), buff,&bsize , NULL, 0 );
+	#endif
 	#elif defined(TARGET_OSX)
 		char path[FILENAME_MAX];
 		uint32_t size = sizeof(path);

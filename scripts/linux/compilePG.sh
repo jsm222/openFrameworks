@@ -1,10 +1,11 @@
-#!/bin/bash
+#!/usr/local/bin/bash
+set -x
 
 export LC_ALL=C
 
 OF_ROOT=$(cd $(dirname $0)/../..; pwd -P)
 
-make Release -C ${OF_ROOT}/apps/projectGenerator/commandLine
+gmake Release -C ${OF_ROOT}/apps/projectGenerator/commandLine
 ret=$?
 if [ $ret -ne 0 ]; then
   echo "There has been a problem compiling the command line projectGenerator."

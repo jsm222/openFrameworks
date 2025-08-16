@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/local/bin/bash
 
 export LC_ALL=C
 
@@ -18,14 +18,14 @@ do
         echo -----------------------------------------------------------------
         echo building  $example
 
-        #projectGenerator .
-        make Debug -j -C "$example"
+        projectGenerator  -o $example
+        gmake Debug -j -C "$example"
         ret=$?
         if [ $ret -ne 0 ]; then
             echo error compiling $example
             exit
         fi
-        make Release -j -C "$example"
+        gmake Release -j -C "$example"
         ret=$?
         if [ $ret -ne 0 ]; then
             echo error compiling $example

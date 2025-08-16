@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/local/bin/bash
 
 export LC_ALL=C
 cd ../../examples
@@ -18,13 +18,13 @@ do
         echo "-----------------------------------------------------------------"
         echo "building " + $example
         cd $example
-        make Debug
+        gmake Debug
         ret=$?
         if [ $ret -ne 0 ]; then
           echo error compiling $example
           exit
         fi
-        make Release
+        gmake Release
         ret=$?
         if [ $ret -ne 0 ]; then
           echo error compiling $example

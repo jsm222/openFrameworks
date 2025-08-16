@@ -1,7 +1,7 @@
 [submodule "apps/projectGenerator"]
 	path = apps/projectGenerator
-	url = https://github.com/openframeworks/projectGenerator
-	branch = master
+	url = https://github.com/jsm222/projectGenerator
+	branch = freebsd-poc
 [submodule "scripts/apothecary"]
 	path = scripts/apothecary
 	url = https://github.com/openframeworks/apothecary

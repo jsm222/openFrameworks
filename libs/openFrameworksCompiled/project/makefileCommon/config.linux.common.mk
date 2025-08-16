@@ -214,7 +214,7 @@ endif
 
 ifndef PROJECT_OPTIMIZATION_CFLAGS_RELEASE
 	# RELEASE Debugging options (http://gcc.gnu.org/onlinedocs/gcc/Debugging-Options.html)
-	PLATFORM_OPTIMIZATION_CFLAGS_RELEASE = -O3
+	PLATFORM_OPTIMIZATION_CFLAGS_RELEASE = -O0 -g
 
 	#ifneq ($(LINUX_ARM),1)
 	#	PLATFORM_OPTIMIZATION_CFLAGS_RELEASE += -march=native -mtune=native
@@ -355,6 +355,8 @@ PLATFORM_PKG_CONFIG_LIBRARIES += freetype2
 PLATFORM_PKG_CONFIG_LIBRARIES += fontconfig
 PLATFORM_PKG_CONFIG_LIBRARIES += sndfile
 PLATFORM_PKG_CONFIG_LIBRARIES += openal
+PLATFORM_PKG_CONFIG_LIBRARIES += tess2
+PLATFORM_PKG_CONFIG_LIBRARIES += kissfft-float
 
 
 ifeq "$(shell pkg-config --exists openssl && echo 1)" "1"

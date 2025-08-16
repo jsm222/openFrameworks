@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/local/bin/bash
 
 for category in $( find ../../examples/ -maxdepth 1 -type d )
 do
