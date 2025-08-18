@@ -14,6 +14,7 @@
 #   ifdefs within the openFrameworks core source code.
 ################################################################################
 
+ifeq ($(PLATFORM_OS),Linux)
 ifeq ($(PLATFORM_ARCH),armv6l)
 	LINUX_ARM=1
 endif
@@ -21,7 +22,7 @@ endif
 ifeq ($(PLATFORM_ARCH),armv7l)
 	LINUX_ARM=1
 endif
-
+endif
 #check if gtk exists and add it
 ifeq ($(CROSS_COMPILING),1)
 	HAS_SYSTEM_GTK3 = $(shell export PKG_CONFIG_LIBDIR=$(PKG_CONFIG_LIBDIR);pkg-config gtk+-3.0 --exists; echo $$?)
@@ -137,7 +138,7 @@ PLATFORM_REQUIRED_ADDONS =
 
 PLATFORM_CXXFLAGS = -Wall -Werror=return-type
 PLATFORM_CXXVER = -std=c++17
-
+ifeq ($(PLATFORM_OS),Linux)
 GCC_MAJOR := $(shell expr `gcc -dumpversion | cut -f1 -d.`)
 GCC_MINOR := $(shell expr `gcc -dumpversion | cut -f2 -d.`)
 
@@ -176,7 +177,12 @@ endif
 ifeq ("$(GCC_MAJOR)","5")
 	PLATFORM_CXXVER = -std=c++17
 endif
-
+endif
+$(info PDD=$(PLATFORM_OS))
+ifeq ($(PLATFORM_OS),FreeBSD)
+PLATFORM_CXXVER = -std=c++20
+$(info PDDA=$(PLATFORM_CXXVER))
+endif
 PLATFORM_CFLAGS = $(subst  $(PLATFORM_CXXVER),,$(PLATFORM_CXXFLAGS))
 PLATFORM_CXXFLAGS += $(PLATFORM_CXXVER)
 
@@ -425,7 +431,6 @@ endif
 ifdef USE_GST_GL
 	PLATFORM_PKG_CONFIG_LIBRARIES += gstreamer-gl-$(GST_VERSION)
 endif
-
 ################################################################################
 # PLATFORM LIBRARY SEARCH PATHS
 #   These are library search paths that are platform specific and are specified
