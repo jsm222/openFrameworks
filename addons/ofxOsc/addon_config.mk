@@ -87,6 +87,9 @@ linux:
 linux64:
 	ADDON_SOURCES_EXCLUDE = libs/oscpack/src/ip/win32/%
 	ADDON_INCLUDES_EXCLUDE = libs/oscpack/src/ip/win32
+freebsd:
+	ADDON_SOURCES_EXCLUDE = libs/oscpack/src/ip/win32/%
+	ADDON_INCLUDES_EXCLUDE = libs/oscpack/src/ip/win32
 
 osx:
 	ADDON_SOURCES_EXCLUDE = libs/oscpack/src/ip/win32/%

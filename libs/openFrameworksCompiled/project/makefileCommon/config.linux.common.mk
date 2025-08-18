@@ -177,7 +177,7 @@ ifeq ("$(GCC_MAJOR)","5")
 	PLATFORM_CXXVER = -std=c++17
 endif
 
-PLATFORM_CFLAGS = $(PLATFORM_CXXFLAGS)
+PLATFORM_CFLAGS = $(subst  $(PLATFORM_CXXVER),,$(PLATFORM_CXXFLAGS))
 PLATFORM_CXXFLAGS += $(PLATFORM_CXXVER)
 
 ################################################################################
@@ -214,7 +214,7 @@ endif
 
 ifndef PROJECT_OPTIMIZATION_CFLAGS_RELEASE
 	# RELEASE Debugging options (http://gcc.gnu.org/onlinedocs/gcc/Debugging-Options.html)
-	PLATFORM_OPTIMIZATION_CFLAGS_RELEASE = -O3
+	PLATFORM_OPTIMIZATION_CFLAGS_RELEASE = -g3
 
 	#ifneq ($(LINUX_ARM),1)
 	#	PLATFORM_OPTIMIZATION_CFLAGS_RELEASE += -march=native -mtune=native

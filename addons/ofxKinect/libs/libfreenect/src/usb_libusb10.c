@@ -29,6 +29,9 @@
 #include <string.h>
 #include <unistd.h>
 #include <libusb.h>
+#ifdef __FreeBSD__
+#include <limits.h>
+#endif
 #include "freenect_internal.h"
 #include "loader.h"
 
@@ -95,6 +98,10 @@ FN_INTERNAL libusb_device * fnusb_find_sibling_device(freenect_context* ctx, lib
                                                       libusb_device** deviceList, int count,
                                                       short (*predicate)(struct libusb_device_descriptor))
 {
+#ifdef __FreeBSD__
+ /* libusb_get_parent is supported after https://github.com/freebsd/freebsd-src/commit/4c556a4e8d149169a7d8e029aee7f3d017fd4e7f  */
+return NULL;
+#else 
 	if (count <= 0) return NULL;
 
 	const int cameraBusNo = libusb_get_bus_number(camera);
@@ -149,6 +156,7 @@ FN_INTERNAL libusb_device * fnusb_find_sibling_device(freenect_context* ctx, lib
 	}
 
 	return NULL;
+#endif;
 }
 
 FN_INTERNAL int fnusb_list_device_attributes(freenect_context *ctx, struct freenect_device_attributes** attribute_list)
@@ -439,6 +447,7 @@ FN_INTERNAL int fnusb_open_subdevices(freenect_device *dev, int index)
 				dev->device_does_motor_control_with_audio = 1;
 
 				// set the LED for non 1414 devices to keep the camera alive for some systems which get freezes
+			
 				libusb_device * audio = fnusb_find_sibling_device(ctx, camera, devs, count, &fnusb_is_audio);
 				fnusb_keep_alive_led(ctx, audio);
 

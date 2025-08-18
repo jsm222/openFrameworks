@@ -84,6 +84,8 @@ endif
 # grep -v "/\.[^\.]" will exclude all .hidden folders and files
 ifeq ($(PLATFORM_OS),Linux)
 	ALL_OF_CORE_THIRDPARTY_SHARED_LIBS := $(shell $(FIND) $(OF_LIBS_PATH)/*/lib/$(ABI_LIB_SUBPATH)/*.so -not -path "*/openFrameworksCompiled/*" 2> /dev/null | grep -v "/\.[^\.]")
+else ifeq ($(PLATFORM_OS),FreeBSD)
+	ALL_OF_CORE_THIRDPARTY_SHARED_LIBS := $(shell $(FIND) $(OF_LIBS_PATH)/*/lib/$(ABI_LIB_SUBPATH)/*.so -not -path "*/openFrameworksCompiled/*" 2> /dev/null | grep -v "/\.[^\.]")
 else
 	ifeq ($(PLATFORM_OS),Darwin)
 		ALL_OF_CORE_THIRDPARTY_SHARED_LIBS := $(shell $(FIND) $(OF_LIBS_PATH)/*/lib/$(ABI_LIB_SUBPATH)/*.dylib -not -path "*/openFrameworksCompiled/*" 2> /dev/null | grep -v "/\.[^\.]")

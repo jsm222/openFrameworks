@@ -1,10 +1,11 @@
 ########################################################################
 # PROCESS VALID ADDONS IF AVAILABLE
 ########################################################################
-
 ifeq ($(PLATFORM_OS),Darwin)
     PLATFORM_ALTERNATIVE := osx
-else 
+else ifeq ($(PLATFORM_OS),FreeBSD)
+	PLATFORM_ALTERNATIVE := freebsd
+else
 	PLATFORM_ALTERNATIVE := void
 endif
 

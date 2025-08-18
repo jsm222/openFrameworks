@@ -72,6 +72,10 @@ linux64:
 	ADDON_LIBS = libs/svgtiny/lib/linux64/libsvgtiny.a
 	ADDON_LIBS += libs/libxml2/lib/linux64/libxml2.a
 
+freebsd:
+	ADDON_LIBS = libs/svgtiny/lib/freebsd/64/libsvgtiny.a
+	ADDON_LIBS += libs/libxml2/lib/freebsd/64/libxml2.a
+
 linuxarmv6l:
 	ADDON_LIBS = libs/svgtiny/lib/linuxarmv6l/libsvgtiny.a
 	ADDON_LIBS += libs/libxml2/lib/linuxarmv6l/libxml2.a

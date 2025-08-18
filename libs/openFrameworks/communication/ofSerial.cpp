@@ -18,7 +18,9 @@
 #endif
 
 #ifdef TARGET_LINUX
-	#include <linux/serial.h>
+#include <sys/termios.h>
+#include <sys/ioctl.h>
+	/*#include <linux/serial.h>*/
 #endif
 
 // FIXME: check if this i sexclusive to windows and move to the right target if yes.
@@ -400,11 +402,13 @@ bool ofSerial::setup(string portName, int baud){
 		#endif
 		tcsetattr(fd, TCSANOW, &options);
 		#ifdef TARGET_LINUX
+		#ifndef __FreeBSD__
 			struct serial_struct kernel_serial_settings;
 			if (ioctl(fd, TIOCGSERIAL, &kernel_serial_settings) == 0) {
 				kernel_serial_settings.flags |= ASYNC_LOW_LATENCY;
 				ioctl(fd, TIOCSSERIAL, &kernel_serial_settings);
 			}
+		#endif
 		#endif
 		bInited = true;
 		ofLogNotice("ofSerial") << "opened " << portName << " sucessfully @ " << baud << " bps";

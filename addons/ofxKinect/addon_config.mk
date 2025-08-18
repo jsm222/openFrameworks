@@ -68,6 +68,19 @@ common:
 	# a specific platform
 	# ADDON_INCLUDES_EXCLUDE =
 
+freebsd:
+	# linux only, any library that should be included in the project using
+	# pkg-config
+	ADDON_PKG_CONFIG_LIBRARIES = libusb-1.0
+
+	# when parsing the file system looking for sources exclude this for all or
+	# a specific platform
+	ADDON_SOURCES_EXCLUDE = libs/libfreenect/platform/%
+
+
+	# when parsing the file system looking for include paths exclude this for all or
+	# a specific platform
+	ADDON_INCLUDES_EXCLUDE = libs/libfreenect/platform/%
 linux64:
 	# linux only, any library that should be included in the project using
 	# pkg-config

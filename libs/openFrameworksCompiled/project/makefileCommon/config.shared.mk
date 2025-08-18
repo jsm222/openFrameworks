@@ -39,7 +39,6 @@ ifneq (,$(findstring MSYS_NT,$(HOST_OS)))
 else
 	FIND=find
 endif
-
 #check for Raspbian as armv7l needs to use armv6l architecture
 ifeq ($(wildcard $(RPI_ROOT)/etc/*-release), /etc/os-release)
 	ifeq ($(shell grep ID=raspbian $(RPI_ROOT)/etc/*-release),ID=raspbian)
@@ -68,7 +67,6 @@ else
 	endif
 endif
 
-
 ifdef MAKEFILE_DEBUG
     $(info PLATFORM_ARCH=$(PLATFORM_ARCH))
     $(info PLATFORM_OS=$(PLATFORM_OS))
@@ -82,7 +80,13 @@ endif
 # if not defined, construct the default PLATFORM_LIB_SUBPATH
 ifndef PLATFORM_LIB_SUBPATH
 	# determine from the arch
-	ifeq ($(PLATFORM_OS),Linux)
+	ifeq ($(PLATFORM_OS),FreeBSD)
+		PLATFORM_LIB_SUBPATH=freebsd
+		ABI_PATH=64
+		SHARED_LIB_EXTENSION=so
+		FIND=/usr/local/bin/gfind
+	
+	else ifeq ($(PLATFORM_OS),Linux)
 		ifeq ($(PLATFORM_ARCH),x86_64)
 			PLATFORM_LIB_SUBPATH=linux64
 		else ifeq ($(PLATFORM_ARCH),armv6l)
@@ -202,6 +206,7 @@ endif
 ################################################################################
 # print debug information if needed
 ifdef MAKEFILE_DEBUG
+
     $(info =================== config.mk paths =============================)
     $(info OF_ADDONS_PATH=$(OF_ADDONS_PATH))
     $(info OF_EXAMPLES_PATH=$(OF_EXAMPLES_PATH))
@@ -214,7 +219,6 @@ ifdef MAKEFILE_DEBUG
     $(info OF_PLATFORM_MAKEFILES=$(OF_PLATFORM_MAKEFILES))
     $(info OF_CORE_LIB_PATH=$(OF_CORE_LIB_PATH))
 endif
-
 
 ifeq ($(wildcard $(OF_LIBS_OF_COMPILED_PROJECT_PATH)/$(PLATFORM_LIB_SUBPATH)),)
 $(error This package doesn't support your platform, $(OF_LIBS_OF_COMPILED_PROJECT_PATH) probably you downloaded the wrong package?)

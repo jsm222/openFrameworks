@@ -54,6 +54,7 @@ enum ofTargetPlatform{
 	OF_TARGET_EMSCRIPTEN,
 	OF_TARGET_LINUXAARCH64,
     OF_TARGET_MACOS,
+    OF_TARGET_FREEBSD,
 };
 
 
@@ -89,7 +90,11 @@ enum ofTargetPlatform{
 
 // 		helpful:
 // 		http://www.ogre3d.org/docs/api/html/OgrePlatform_8h-source.html
-
+#if defined(__FreeBSD__)
+#define OF_FREEBSD
+#define TARGET_FREEBSD
+#define TARGET_LINUX
+#endif
 #if defined( __WIN32__ ) || defined( _WIN32 )
 	#define OF_OS_WINDOWS
 	#define TARGET_WIN32
@@ -228,6 +233,7 @@ enum ofTargetPlatform{
 #endif
 
 #ifdef TARGET_LINUX
+	#define OF_CAIRO
 
 	#ifdef TARGET_LINUX_ARM
 		#ifdef TARGET_RASPBERRY_PI

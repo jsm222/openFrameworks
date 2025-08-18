@@ -1091,7 +1091,7 @@ string ofSystem(const string & command) {
 
 //--------------------------------------------------
 ofTargetPlatform ofGetTargetPlatform() {
-#ifdef TARGET_LINUX
+#if defined(TARGET_LINUX )
 	string arch = ofSystem("uname -m");
 	if (ofIsStringInString(arch, "x86_64")) {
 		return OF_TARGET_LINUX64;
@@ -1102,7 +1102,11 @@ ofTargetPlatform ofGetTargetPlatform() {
 	} else if (ofIsStringInString(arch, "aarch64")) {
 		return OF_TARGET_LINUXAARCH64;
 	} else {
+		#ifdef TARGET_FREEBSD
+			return OF_TARGET_FREEBSD;
+		#else
 		return OF_TARGET_LINUX;
+		#endif
 	}
 #elif defined(TARGET_OSX)
 	return OF_TARGET_OSX;
@@ -1118,6 +1122,8 @@ ofTargetPlatform ofGetTargetPlatform() {
 	return OF_TARGET_IOS;
 #elif defined(TARGET_EMSCRIPTEN)
 	return OF_TARGET_EMSCRIPTEN;
+#elif defined(TARGET_FREEBSD)
+	return OF_TARGET_FREEBSD
 #endif
 }
 

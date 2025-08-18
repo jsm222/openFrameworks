@@ -87,6 +87,11 @@ linux64:
 	ADDON_LIBS_EXCLUDE = ../ofxAssimpModelLoader/libs/assimp
 	ADDON_INCLUDES_EXCLUDE = ../ofxAssimpModelLoader/libs/assimp/%
 
+freebsd:
+	ADDON_PKG_CONFIG_LIBRARIES = assimp
+	ADDON_LIBS_EXCLUDE = ../ofxAssimpModelLoader/libs/assimp
+	ADDON_INCLUDES_EXCLUDE = ../ofxAssimpModelLoader/libs/assimp/%
+
 msys2:
 	ADDON_PKG_CONFIG_LIBRARIES = assimp
 	ADDON_LIBS_EXCLUDE = ../ofxAssimpModelLoader/libs/assimp

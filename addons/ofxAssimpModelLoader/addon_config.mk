@@ -80,6 +80,11 @@ linux:
 	ADDON_LIBS_EXCLUDE = libs/assimp
 	ADDON_INCLUDES_EXCLUDE = libs/assimp/%
 
+freebsd:
+	ADDON_PKG_CONFIG_LIBRARIES = assimp
+	ADDON_LIBS_EXCLUDE = libs/assimp
+	ADDON_INCLUDES_EXCLUDE = libs/assimp/%
+
 linux64:
 	ADDON_PKG_CONFIG_LIBRARIES = assimp
 	ADDON_LIBS_EXCLUDE = libs/assimp
