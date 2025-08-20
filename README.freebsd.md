@@ -24,7 +24,7 @@ cd openFrameworks/scripts/apothecary/out
 cp -av * ../../../libs/
 cd openFrameworks/scripts/apothecary/scripts/freebsd
 ./compileOF.sh -j `sysctl -n hw.ncpu`
-./compilePF.sh -j `sysctl -n hw.ncpu`
+./compilePG.sh -j `sysctl -n hw.ncpu`
 cd openFrameworks/scripts/apothecary/scripts/freebsd
 ./buildAllExamples.sh
 ```
