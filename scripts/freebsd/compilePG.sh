@@ -1,5 +1,7 @@
 #!/usr/local/bin/bash
 
+uid=$(id -u)
+
 export LC_ALL=C
 
 OF_ROOT=$(cd $(dirname $0)/../..; pwd -P)
@@ -18,7 +20,18 @@ read -p "Do you want to install the command line project generator? [Y/n] " -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     echo "To copy the command line project generator we need root permission."
-    sudo cp ${OF_ROOT}/apps/projectGenerator/commandLine/bin/projectGenerator /usr/local/bin/projectGenerator
+    echo "checking user...."
+    if [[ $uid =  0 ]]; then
+        echo "root confirmed"
+        cp ${OF_ROOT}/apps/projectGenerator/commandLine/bin/projectGenerator /usr/local/bin/projectGenerator
+    else
+        if [[ ! -f /usr/local/bin/sudo ]]; then
+            echo "please install install sudo"
+            exit 1
+        else
+            sudo cp ${OF_ROOT}/apps/projectGenerator/commandLine/bin/projectGenerator /usr/local/bin/projectGenerator
+        fi
+    fi
     if [ ! $? -eq 0 ]; then
         echo "Failed to copy the projectGenerator file."
         exit
